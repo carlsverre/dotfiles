@@ -12,5 +12,5 @@ else
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-ln -sf ${DOTFILES_LOCATION}/zsh/zshrc ${HOME}/.zshrc
-ln -sf ${DOTFILES_LOCATION}/zsh/custom ${ZSH_CUSTOM}
+ln -sfn ${DOTFILES_LOCATION}/zsh/zshrc ${HOME}/.zshrc
+ln -sfn ${DOTFILES_LOCATION}/zsh/custom ${ZSH_CUSTOM}
