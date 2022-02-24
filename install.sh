@@ -9,6 +9,8 @@ mkdir -p "${LOCALBIN}"
 
 mkdir -p "${HOME}/.config"
 
+ln -sfn "${DOTFILES_LOCATION}/bin" "${HOME}/bin"
+
 ${DOTFILES_LOCATION}/zsh/install.sh
 
 RIPGREP_VERSION=13.0.0
