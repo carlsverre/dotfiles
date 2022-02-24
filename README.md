@@ -1,1 +1,3 @@
-# Dotfiles repo for codespaces
+# Dotfiles repo
+
+In development, currently only used for vscode devcontainers & codespaces.
