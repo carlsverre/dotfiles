@@ -1,23 +1,16 @@
-# Path to your oh-my-zsh installation.
-export ZSH="${HOME}/.oh-my-zsh"
-export ZSH_CUSTOM="${HOME}/.config/zsh-custom"
+if [ -f ~/.localrc.before ]; then
+    . ~/.localrc.before
+fi
 
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="f0a"
+if [[ ${PROFILE_ZSH:0} -eq 1 ]]; then zmodload zsh/zprof; fi
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+export ZSH_HOME="${HOME}/.config/zsh"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+source "${ZSH_HOME}/antigen.zsh"
+antigen init "${ZSH_HOME}/antigenrc"
 
-source $ZSH/oh-my-zsh.sh
+if [ -f ${HOME}/.localrc ]; then
+    source ${HOME}/.localrc
+fi
 
-DISABLE_AUTO_UPDATE=true
-DISABLE_UPDATE_PROMPT=true
+if [[ ${PROFILE_ZSH} -eq 1 ]]; then zprof; fi
