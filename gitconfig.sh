@@ -9,5 +9,14 @@ git config --global pull.ff only
 git config --global rerere.enabled true
 git config --global include.path .gitconfig.local
 git config --global init.defaultBranch main
+git config --global core.pager "less -FXRS -x4"
+git config --global core.preloadIndex true
+git config --global core.excludesFile ~/.gitignore
+git config --global core.excludesFile ~/.gitignore
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+git config --global color.interactive auto
+git config --global pager.color true
 
 log_info "[ok] setup gitconfig"

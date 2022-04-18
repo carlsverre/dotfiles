@@ -139,8 +139,8 @@ endif
 "------  Vim Config Stuff  ------"
 
 " Set swp files to go to a central location
-set backupdir=$HOME/.config/nvim/swp//,/tmp//,.
-set directory=$HOME/.config/nvim/swp//,/tmp//,.
+set backupdir=$HOME/.local/share/nvim/swp//,/tmp//,.
+set directory=$HOME/.local/share/nvim/swp//,/tmp//,.
 
 " Share clipboard
 set clipboard+=unnamedplus
@@ -207,7 +207,7 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 
 "------  Persistent undo  ------"
 
-set undodir=$HOME/.config/nvim/undo/
+set undodir=$HOME/.local/share/nvim/undo/
 set undoreload=10000
 set undofile
 
