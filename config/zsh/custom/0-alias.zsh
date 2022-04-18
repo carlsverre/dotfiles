@@ -8,3 +8,16 @@ alias gic='git checkout'
 
 # rg
 alias s='rg -S'
+
+# clipboard
+alias copy="xclip -selection clipboard -in"
+alias paste="xclip -selection clipboard -out"
+
+# docker
+alias docker-ip="docker inspect -f '{{ .NetworkSettings.IPAddress }}'"
+
+# feh
+alias feh="feh --scale-down --auto-zoom --draw-filename --draw-tinted"
+
+# wm
+alias hc="herbstclient"

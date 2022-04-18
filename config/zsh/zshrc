@@ -9,6 +9,14 @@ export ZSH_HOME="${HOME}/.config/zsh"
 source "${ZSH_HOME}/antigen.zsh"
 antigen init "${ZSH_HOME}/antigenrc"
 
+eval "$(zoxide init zsh --cmd j)"
+eval "$(direnv hook zsh)"
+
+DIRCOLORS_SOLARIZED_THEME="${HOME}/.antigen/bundles/seebi/dircolors-solarized/dircolors.ansi-dark"
+if [[ -f "${DIRCOLORS_SOLARIZED_THEME}" ]]; then
+    eval $(dircolors ${DIRCOLORS_SOLARIZED_THEME})
+fi
+
 if [ -f ${HOME}/.localrc ]; then
     source ${HOME}/.localrc
 fi

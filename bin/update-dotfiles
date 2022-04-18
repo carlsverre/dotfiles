@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-SCRIPT_PATH="$(realpath "$0")"
-SCRIPT_DIR="$(dirname "${SCRIPT_PATH}")"
+set -eEuo pipefail
 
-git -C "${SCRIPT_DIR}" pull --ff-only
+ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+git -C "${ROOTDIR}" pull --ff-only
+
+export UPDATE=true
+${ROOTDIR}/install.sh

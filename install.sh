@@ -2,21 +2,35 @@
 
 set -eEuo pipefail
 
-export DOTFILES_LOCATION="$(pwd)"
+export OS="$(uname)"
+export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export LOCALBIN="$HOME/.local/bin"
 
-export LOCALBIN="$HOME/localbin"
+# load helper functions
+source ${ROOTDIR}/lib.sh
+
+# create localbin
 mkdir -p "${LOCALBIN}"
 
-mkdir -p "${HOME}/.config"
+# setup simple links
+safelink "${HOME}/bin" "${ROOTDIR}/bin"
 
-ln -sfn "${DOTFILES_LOCATION}/bin" "${HOME}/bin"
+# link .config dirs
+for x in ${ROOTDIR}/config/*; do
+    if [[ -d "${x}" ]]; then
+        safelink "${HOME}/.config/$(basename ${x})" "${x}"
+    fi
+done
 
-${DOTFILES_LOCATION}/zsh/install.sh
+# install dotfiles
+safelink "${HOME}/.zshrc" "${ROOTDIR}/config/zsh/zshrc"
+safelink "${HOME}/.Xresources" "${ROOTDIR}/config/xresources"
 
-RIPGREP_VERSION=13.0.0
-RIPGREP_URL=https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl.tar.gz
-if [ -f "${LOCALBIN}/rg" ]; then
-    echo "ripgrep is already installed"
-else
-    curl -fsSL "${RIPGREP_URL}" | tar -xzf - -C "${LOCALBIN}" --strip-components=1 ripgrep-${RIPGREP_VERSION}-x86_64-unknown-linux-musl/rg
-fi
+# install tools
+source tools.sh
+
+# setup gitconfig
+source ${ROOTDIR}/gitconfig.sh
+
+# install wallpapers
+safelink "${HOME}/.wallpapers" "${ROOTDIR}/wallpapers"
