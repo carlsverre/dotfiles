@@ -82,3 +82,7 @@ install_from_tar_gz ${NEOVIM_URL} "nvim-linux64/bin/nvim"
 
 # install neovim plugins
 nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugInstall" -c "qa"
+
+# create neovim scratch spaces
+mkdir -p "${HOME}/.local/share/nvim/swp/"
+mkdir -p "${HOME}/.local/share/nvim/undo/"

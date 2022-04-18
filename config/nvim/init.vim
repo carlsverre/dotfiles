@@ -1,4 +1,4 @@
-call plug#begin()
+call plug#begin("~/.local/share/nvim/plugged")
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'LnL7/vim-nix'
