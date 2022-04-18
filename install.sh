@@ -4,7 +4,6 @@ set -eEuo pipefail
 
 export OS="$(uname)"
 export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export LOCALBIN="$HOME/.local/bin"
 
 # load helper functions
 source ${ROOTDIR}/lib.sh
@@ -23,8 +22,8 @@ for x in ${ROOTDIR}/config/*; do
 done
 
 # install dotfiles
-safelink "${HOME}/.zshrc" "${ROOTDIR}/config/zsh/zshrc"
 safelink "${HOME}/.Xresources" "${ROOTDIR}/config/xresources"
+safelink "${HOME}/.zshrc" "${ROOTDIR}/config/zsh/zshrc"
 
 # install tools
 source tools.sh

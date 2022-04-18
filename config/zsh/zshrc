@@ -17,6 +17,10 @@ if [[ -f "${DIRCOLORS_SOLARIZED_THEME}" ]]; then
     eval $(dircolors ${DIRCOLORS_SOLARIZED_THEME})
 fi
 
+# webinstall depends on pathman which used to be called envman(??)
+# anyways, it adds this line if we don't add it
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
 if [ -f ${HOME}/.localrc ]; then
     source ${HOME}/.localrc
 fi

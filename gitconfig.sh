@@ -10,4 +10,4 @@ git config --global rerere.enabled true
 git config --global include.path .gitconfig.local
 git config --global init.defaultBranch main
 
-log_info "[ok] user gitconfig"
+log_info "[ok] setup gitconfig"

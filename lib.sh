@@ -18,6 +18,10 @@ if [ -z "$ROOTDIR" ]; then
     return 1
 fi
 
+export LOCALBIN="$HOME/.local/bin"
+export LOCALOPT="$HOME/.local/opt"
+export WEBI_WELCOME=0
+
 function is_mac {
     test $(uname -s) = "Darwin"
 }
@@ -79,15 +83,18 @@ should_update() {
 
 install_from_tar_gz() {
     local url="$1"
-    local tarpath="$2"
-    local binname=$(basename "${tarpath}")
+    local binpath="$2"
+    local binname="${3:-$(basename "$binpath")}"
 
     if ! should_update && [[ -e "${LOCALBIN}/${binname}" ]]; then
         log_info "[ok] ${binname} already installed"
         return 0
     fi
 
-    curl -Ls "${url}" | tar xzf - --strip-components 1 -C "${LOCALBIN}" "${tarpath}"
+    mkdir -p "${LOCALOPT}/${binname}"
+    curl -Ls "${url}" | tar xzf - -C "${LOCALOPT}/${binname}"
+    safelink "${LOCALBIN}/${binname}" "${LOCALOPT}/${binname}/${binpath}"
+
     log_info "[++] ${binname} installed"
 }
 
@@ -108,6 +115,7 @@ install_binary() {
 webinstall() {
     local name="$1"
     local binname="${2:-${name}}"
+    binname="${binname%@*}"
 
     # install webi if missing
     if [[ ! -e "${LOCALBIN}/webi" ]]; then
@@ -115,11 +123,10 @@ webinstall() {
         log_info "[++] webi installed"
     fi
 
-    if ! should_update && [[ -e "${LOCALBIN}/${binname}" ]]; then
+    if should_update || ! command -v "${binname}" >/dev/null; then
+        log_info "installing ${binname}"
+        webi "${name}"
+    else
         log_info "[ok] ${binname} already installed"
-        return 0
     fi
-
-    webi "${name}" >/dev/null
-    log_info "[++] ${binname} installed"
 }
