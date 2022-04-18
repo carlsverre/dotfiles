@@ -27,7 +27,7 @@ safelink "${HOME}/.xsessionrc" "${ROOTDIR}/config/xsessionrc"
 safelink "${HOME}/.zshrc" "${ROOTDIR}/config/zsh/zshrc"
 
 # install tools
-source tools.sh
+source ${ROOTDIR}/tools.sh
 
 # setup gitconfig
 source ${ROOTDIR}/gitconfig.sh
