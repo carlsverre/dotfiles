@@ -72,8 +72,14 @@ function safelink {
         log_info "[++] ${pointer} -> ${target}"
     fi
 
-    # setup the symlink, -i will ask the user before overwriting a symlink
-    ln -i -s "$target" "$pointer"
+    if [[ "${REMOTE_CONTAINERS}" == "true" ]]; then
+        # in a devcontainer we just overwrite anything there
+        ln -f -s "$target" "$pointer"
+        log_info "[++] ${pointer} -> ${target}"
+    else
+        # setup the symlink, -i will ask the user before overwriting a symlink
+        ln -i -s "$target" "$pointer"
+    fi
     return $?
 }
 
