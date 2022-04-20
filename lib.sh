@@ -21,6 +21,7 @@ fi
 export LOCALBIN="$HOME/.local/bin"
 export LOCALOPT="$HOME/.local/opt"
 export WEBI_WELCOME=0
+export REMOTE_CONTAINERS="${REMOTE_CONTAINERS:-}"
 
 function is_mac {
     test $(uname -s) = "Darwin"
