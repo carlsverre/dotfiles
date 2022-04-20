@@ -1,0 +1,5 @@
+(split horizontal:0.55813:0
+    (split vertical:0.77:0
+        (clients vertical:0)
+        (clients vertical:0))
+    (clients vertical:0))
