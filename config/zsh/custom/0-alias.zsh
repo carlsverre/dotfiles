@@ -21,6 +21,3 @@ alias feh="feh --scale-down --auto-zoom --draw-filename --draw-tinted"
 
 # wm
 alias hc="herbstclient"
-
-# vim/neovim
-alias vim="nvim"
