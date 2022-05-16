@@ -8,7 +8,6 @@ hc emit_hook reload
 
 # startup scripts
 xsetroot -solid '#262626'
-autorandr -cf
 picom &
 
 # remove all existing keybindings
@@ -160,10 +159,13 @@ hc unlock
 # load monitors
 hc detect_monitors
 
-# find the panel
-panel=~/.config/herbstluftwm/panel.sh
-[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-for monitor in $(hc list_monitors | cut -d: -f1) ; do
-    # start it on each monitor
-    "$panel" "$monitor" &
-done
+# run autorandr
+autorandr -cf
+
+# if autorandr didn't detect the config, run panels manually
+if [ -z "$(autorandr --current)" ]; then
+    panel=~/.config/herbstluftwm/panel.sh
+    if [ -x "$panel" ]; then
+        "$panel"
+    fi
+fi
