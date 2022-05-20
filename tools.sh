@@ -1,9 +1,14 @@
 # use webinstall to get some useful tools
 # index available here: https://github.com/webinstall/webi-installers
-webinstall rg
-webinstall fzf
-webinstall zoxide
-command -v jq >/dev/null || webinstall jq
+webinstall pathman
+
+webinstall rg &
+webinstall fd &
+webinstall fzf &
+webinstall zoxide &
+webinstall jq &
+
+wait
 
 # install direnv
 DIRENV_VERSION="v2.31.0"

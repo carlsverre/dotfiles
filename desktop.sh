@@ -23,10 +23,14 @@ xargs sudo apt install -y <<EOF
 EOF
 
 # install language sdks
-webinstall node@lts
-webinstall golang@stable go
-webinstall deno@stable
-webinstall zig@stable
+webinstall pathman
+
+webinstall node@lts &
+webinstall golang@stable go &
+webinstall deno@stable &
+webinstall zig@stable &
+
+wait
 
 # rust
 if ! should_update && [[ -d "${HOME}/.cargo" ]]; then
