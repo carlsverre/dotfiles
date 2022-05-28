@@ -39,7 +39,7 @@ function canonical_path {
 # Sets up a simlink at $pointer pointing at $target
 function safelink {
     local pointer="$1"
-    local target="${2}"
+    local target="$(canonical_path "${2}")"
 
     # verify args are non-empty
     if [ -z "$pointer" ]; then
