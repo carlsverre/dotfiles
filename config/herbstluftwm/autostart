@@ -147,8 +147,7 @@ hc rule class=Pavucontrol floating=on floatplacement=center
 hc rule class=Blueman-manager floating=on floatplacement=center
 
 hc rule class=Steam floating=on floatplacement=center
-hc rule class~"steam_app.*" floating=on floatplacement=center
-
+hc rule name=Steam floating=on floatplacement=center
 hc rule class~"steam_app.*" floating=on floatplacement=center
 
 hc set tree_style '╾│ ├└╼─┐'
