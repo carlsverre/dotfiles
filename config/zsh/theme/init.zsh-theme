@@ -1,5 +1,10 @@
 __zsh_prompt() {
     PROMPT=""
+    if [[ -n "${SSH_CLIENT}" ]]; then
+        PROMPT+='%{$fg_bold[red]%}('
+        PROMPT+="$(hostname)"
+        PROMPT+=')%{$reset_color%} '
+    fi
     PROMPT+='%{$fg_bold[blue]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%} ' # cwd
     PROMPT+='%(?:%{$reset_color%}➜ :%{$fg_bold[red]%}➜ )' # User/exit code arrow
     PROMPT+='%{$reset_color%}'
