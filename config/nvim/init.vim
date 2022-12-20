@@ -422,7 +422,7 @@ augroup END
 
 "------  fzf w/ ripgrep support  ------"
 
-map <expr> <leader>t fugitive#head() != '' ? ':GFiles --cached --others --exclude-standard<CR>' : ':Files<CR>'
+map <expr> <leader>t fugitive#Head() != '' ? ':GFiles --cached --others --exclude-standard<CR>' : ':Files<CR>'
 nmap <leader>b :Buffers<CR>
 
 let g:fzf_colors =

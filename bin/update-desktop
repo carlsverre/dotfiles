@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eEuo pipefail
+
+ROOTDIR="$( cd "$(dirname $(dirname $(realpath "${BASH_SOURCE[0]}")))" && pwd )"
+
+update-dotfiles
+
+export UPDATE=true
+${ROOTDIR}/desktop.sh

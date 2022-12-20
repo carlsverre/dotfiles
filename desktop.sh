@@ -9,6 +9,7 @@ export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${ROOTDIR}/lib.sh
 
 # install apt packages
+log_info "Updating apt packages"
 sudo apt update
 xargs sudo apt install -y <<EOF
     build-essential
@@ -26,7 +27,7 @@ EOF
 webinstall pathman
 
 webinstall node@lts &
-webinstall golang@stable go &
+webinstall go-essentials@stable go &
 webinstall deno@stable &
 webinstall zig@stable &
 
@@ -41,24 +42,27 @@ else
 fi
 
 # python
-if [[ -d "${HOME}/.pyenv" ]]; then
-    log_info "[ok] pyenv already installed"
-else
+if [[ ! -d "${HOME}/.pyenv" ]]; then
     curl https://pyenv.run | bash
-    log_info "[++] pyenv already installed"
+    eval "$(${HOME}/.pyenv/bin/pyenv init -)"
+    git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
+    log_info "[++] pyenv installed"
+elif should_update; then
+    pyenv update
+else
+    log_info "[ok] pyenv already installed"
 fi
 
 if should_update || ! command -v "python" >/dev/null; then
     log_info "installing python"
 
     eval "$(${HOME}/.pyenv/bin/pyenv init -)"
-    eval "$(${HOME}/.pyenv/bin/pyenv virtualenv-init -)"
 
     py2_version=2.7.18
-    py3_version=3.10.4
+    py3_version=3.11.1
 
-    pyenv install ${py2_version}
-    pyenv install ${py3_version}
+    pyenv install -s ${py2_version}
+    pyenv install -s ${py3_version}
     pyenv global ${py3_version} ${py2_version}
 
     pip install --upgrade pip
@@ -80,12 +84,12 @@ else
 fi
 
 # install neovim
-NEOVIM_VERSION="v0.7.0"
+NEOVIM_VERSION="v0.8.1"
 NEOVIM_URL="https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/nvim-linux64.tar.gz"
 install_from_tar_gz ${NEOVIM_URL} "nvim-linux64/bin/nvim"
 
 # install neovim plugins
-nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugInstall" -c "qa"
+nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugInstall" -c "PlugUpdate" -c "qa"
 
 # install neovim alias to vim
 # (don't use a bash alias because we want vim to be picked up by programs like fzf)
