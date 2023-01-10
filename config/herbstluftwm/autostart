@@ -150,6 +150,11 @@ hc rule class=Steam floating=on floatplacement=center
 hc rule name=Steam floating=on floatplacement=center
 hc rule class~"steam_app.*" floating=on floatplacement=center
 
+hc rule fixedsize floating=on floatplacement=smart
+
+# zoom
+hc rule class='zoom' floating=on floatplacement=smart
+
 hc set tree_style '╾│ ├└╼─┐'
 
 # unlock, just to be sure
