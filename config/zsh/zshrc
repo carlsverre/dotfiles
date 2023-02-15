@@ -12,9 +12,11 @@ antigen init "${ZSH_HOME}/antigenrc"
 eval "$(zoxide init zsh --cmd j)"
 eval "$(direnv hook zsh)"
 
-DIRCOLORS_SOLARIZED_THEME="${HOME}/.antigen/bundles/seebi/dircolors-solarized/dircolors.ansi-dark"
-if [[ -f "${DIRCOLORS_SOLARIZED_THEME}" ]]; then
-    eval $(dircolors ${DIRCOLORS_SOLARIZED_THEME})
+if command -v dircolors; then
+  DIRCOLORS_SOLARIZED_THEME="${HOME}/.antigen/bundles/seebi/dircolors-solarized/dircolors.ansi-dark"
+  if [[ -f "${DIRCOLORS_SOLARIZED_THEME}" ]]; then
+      eval $(dircolors ${DIRCOLORS_SOLARIZED_THEME})
+  fi
 fi
 
 # webinstall depends on pathman which used to be called envman(??)

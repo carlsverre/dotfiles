@@ -10,8 +10,11 @@ webinstall jq &
 
 # install direnv
 DIRENV_VERSION="v2.32.2"
-DIRENV_URL="https://github.com/direnv/direnv/releases/download/${DIRENV_VERSION}/direnv.linux-amd64"
-install_binary "${DIRENV_URL}" direnv &
+if is_mac; then
+  DIRENV_URL="https://github.com/direnv/direnv/releases/download/${DIRENV_VERSION}/direnv.darwin-arm64"
+else
+  DIRENV_URL="https://github.com/direnv/direnv/releases/download/${DIRENV_VERSION}/direnv.linux-amd64"
+fi
+install_binary "${DIRENV_URL}" direnv
 
 wait
-
