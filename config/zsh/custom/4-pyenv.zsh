@@ -1,5 +1,6 @@
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-if [[ -d "${HOME}/.pyenv" ]]; then
+if command -v pyenv >/dev/null; then
+    eval "$(pyenv init -)"
+elif [[ -x "${HOME}/.pyenv/bin/pyenv" ]]; then
     eval "$(${HOME}/.pyenv/bin/pyenv init -)"
-    eval "$(${HOME}/.pyenv/bin/pyenv virtualenv-init -)"
 fi

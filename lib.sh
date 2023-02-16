@@ -132,7 +132,7 @@ webinstall() {
 
     if should_update || ! command -v "${binname}" >/dev/null; then
         log_info "installing ${binname}"
-        webi "${name}"
+        ${LOCALBIN}/webi "${name}"
     else
         log_info "[ok] ${binname} already installed"
     fi

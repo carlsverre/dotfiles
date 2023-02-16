@@ -101,7 +101,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Hack NF
+    family: Hack Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -494,14 +494,14 @@ selection:
 # at once.
 key_bindings:
   # (Windows, Linux, and BSD only)
-  - { key: V,        mods: Control|Shift, action: Paste            }
-  - { key: C,        mods: Control|Shift, action: Copy             }
-  #- { key: Insert,   mods: Shift,         action: PasteSelection   }
-  - { key: Key0,     mods: Control,       action: ResetFontSize    }
-  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  - { key: Add,      mods: Control,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
-  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: V,              mods: Control|Shift, action: Paste            }
+  - { key: C,              mods: Control|Shift, action: Copy             }
+  #- { key: Insert,        mods: Shift,         action: PasteSelection   }
+  - { key: Key0,           mods: Control,       action: ResetFontSize    }
+  - { key: Equals,         mods: Control,       action: IncreaseFontSize }
+  - { key: Plus,           mods: Control,       action: IncreaseFontSize }
+  - { key: NumpadSubtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Minus,          mods: Control,       action: DecreaseFontSize }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
