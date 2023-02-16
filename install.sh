@@ -12,7 +12,9 @@ source ${ROOTDIR}/lib.sh
 mkdir -p "${LOCALBIN}"
 
 # setup simple links
-safelink "${HOME}/bin" "${ROOTDIR}/bin"
+if ! is_mac; then
+  safelink "${HOME}/bin" "${ROOTDIR}/bin"
+fi
 
 # link .config dirs
 for x in ${ROOTDIR}/config/*; do

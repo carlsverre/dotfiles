@@ -2,11 +2,14 @@
 # index available here: https://github.com/webinstall/webi-installers
 webinstall pathman
 
-webinstall rg &
+if ! is_mac; then
+  webinstall rg &
+  webinstall jq &
+fi
+
 webinstall fd &
 webinstall fzf &
 webinstall zoxide &
-webinstall jq &
 
 # install direnv
 DIRENV_VERSION="v2.32.2"
