@@ -12,7 +12,7 @@ antigen init "${ZSH_HOME}/antigenrc"
 eval "$(zoxide init zsh --cmd j)"
 eval "$(direnv hook zsh)"
 
-if command -v dircolors; then
+if command -v dircolors >/dev/null; then
   DIRCOLORS_SOLARIZED_THEME="${HOME}/.antigen/bundles/seebi/dircolors-solarized/dircolors.ansi-dark"
   if [[ -f "${DIRCOLORS_SOLARIZED_THEME}" ]]; then
       eval $(dircolors ${DIRCOLORS_SOLARIZED_THEME})
