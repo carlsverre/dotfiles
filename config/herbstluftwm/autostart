@@ -14,7 +14,7 @@ picom &
 hc keyunbind --all
 
 # keybindings
-Mod=Mod1    # Use alt as the main modifier
+Mod=Super    # Use super as the main modifier
 
 hc keybind $Mod-Shift-q close
 hc keybind $Mod-Shift-r reload
