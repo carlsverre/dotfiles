@@ -77,10 +77,10 @@ hc set swap_monitors_to_get_tag 0
 # layouting
 hc keybind $Mod-z spawn select-layout
 hc keybind $Mod-x remove
-hc keybind $Mod-s floating toggle
+# hc keybind $Mod-s floating toggle
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-Shift-space set_attr clients.focus.floating toggle
-hc keybind $Mod-p pseudotile toggle
+# hc keybind $Mod-p pseudotile toggle
 hc keybind $Mod-c cycle_layout 1 vertical horizontal
 
 # mouse

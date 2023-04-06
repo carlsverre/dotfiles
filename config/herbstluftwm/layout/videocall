@@ -1,7 +1,9 @@
-(split horizontal:0.28:0
+(split horizontal:0.25:1
+  (split vertical:0.6:1
     (clients vertical:0)
-    (split horizontal:0.6:0
-        (split vertical:0.26:0
-            (clients vertical:0)
-            (clients vertical:0))
-        (clients vertical:0)))
+    (clients vertical:0))
+  (split horizontal:0.57:1
+    (split vertical:0.26:0
+        (clients vertical:0)
+        (clients vertical:0))
+    (clients vertical:0)))

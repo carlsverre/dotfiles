@@ -12,5 +12,6 @@ antigen bundle seebi/dircolors-solarized
 
 antigen theme ${ZSH_HOME}/theme --no-local-clone
 antigen bundle ${ZSH_HOME}/custom --no-local-clone
+antigen bundle ${HOME}/.zsh-completions --no-local-clone
 
 antigen apply
