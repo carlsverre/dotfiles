@@ -29,7 +29,6 @@ webinstall pathman
 webinstall node@lts &
 webinstall go-essentials@stable go &
 webinstall deno@stable &
-webinstall zig@stable &
 
 wait
 
@@ -59,7 +58,7 @@ if should_update || ! command -v "python" >/dev/null; then
     eval "$(${HOME}/.pyenv/bin/pyenv init -)"
 
     py2_version=2.7.18
-    py3_version=3.11.1
+    py3_version=3.11.5
 
     pyenv install -s ${py2_version}
     pyenv install -s ${py3_version}
@@ -84,12 +83,12 @@ else
 fi
 
 # install neovim
-NEOVIM_VERSION="v0.8.1"
+NEOVIM_VERSION="v0.9.1"
 NEOVIM_URL="https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/nvim-linux64.tar.gz"
 install_from_tar_gz ${NEOVIM_URL} "nvim-linux64/bin/nvim"
 
 # install neovim plugins
-nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugInstall" -c "PlugUpdate" -c "qa"
+nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugUpgrade" -c "PlugInstall" -c "PlugUpdate" -c "qa" && log_info "updated nvim plugins"
 
 # install neovim alias to vim
 # (don't use a bash alias because we want vim to be picked up by programs like fzf)
