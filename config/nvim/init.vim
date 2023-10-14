@@ -166,14 +166,6 @@ au BufWritePost *.re silent! ReasonPrettyPrint
 "------  Python Stuff  ------"
 let g:python_highlight_all=1
 
-if filereadable(expand("~/.pyenv/versions/py3nvim/bin/python"))
-    let g:python3_host_prog = "~/.pyenv/versions/py3nvim/bin/python"
-endif
-
-if filereadable(expand("~/.pyenv/versions/py2nvim/bin/python"))
-    let g:python_host_prog = "~/.pyenv/versions/py2nvim/bin/python"
-endif
-
 "------  Whitespace  ------"
 
 " Show trailing whitespace

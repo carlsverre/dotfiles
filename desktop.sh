@@ -40,38 +40,6 @@ else
     log_info "[++] rust installed"
 fi
 
-# python
-if [[ ! -d "${HOME}/.pyenv" ]]; then
-    curl https://pyenv.run | bash
-    eval "$(${HOME}/.pyenv/bin/pyenv init -)"
-    git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
-    log_info "[++] pyenv installed"
-elif should_update; then
-    pyenv update
-else
-    log_info "[ok] pyenv already installed"
-fi
-
-if should_update || ! command -v "python" >/dev/null; then
-    log_info "installing python"
-
-    eval "$(${HOME}/.pyenv/bin/pyenv init -)"
-
-    py2_version=2.7.18
-    py3_version=3.11.5
-
-    pyenv install -s ${py2_version}
-    pyenv install -s ${py3_version}
-    pyenv global ${py3_version} ${py2_version}
-
-    pip install --upgrade pip
-    pip2 install --upgrade pip
-
-    log_info "[++] python installed"
-else
-    log_info "[ok] python already installed"
-fi
-
 # install plug.vim
 PLUG_VIM_PATH="${HOME}/.local/share/nvim/site/autoload/plug.vim"
 PLUG_VIM_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"

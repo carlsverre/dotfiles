@@ -39,14 +39,14 @@ hc keybind $Mod-k     focus up
 hc keybind $Mod-l     focus right
 
 # moving clients in tiling and floating mode
-hc keybind $Mod-Shift-h     shift left
-hc keybind $Mod-Shift-j     shift down
-hc keybind $Mod-Shift-k     shift up
-hc keybind $Mod-Shift-l     shift right
+hc keybind $Mod-Shift-h     shift --level=tabs left
+hc keybind $Mod-Shift-j     shift --level=tabs down
+hc keybind $Mod-Shift-k     shift --level=tabs up
+hc keybind $Mod-Shift-l     shift --level=tabs right
 
-# splitting frames
-# hc keybind $Mod-d chain , split right , focus -e r
-# hc keybind $Mod-Shift-d chain , split bottom , focus -e d
+# tab movement
+hc keybind $Mod-Tab         focus --level=tabs right
+hc keybind $Mod-Shift-Tab   focus --level=tabs left
 
 # explode the current frame
 hc keybind $Mod-Control-space split explode
@@ -81,17 +81,12 @@ hc keybind $Mod-x remove
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-Shift-space set_attr clients.focus.floating toggle
 # hc keybind $Mod-p pseudotile toggle
-hc keybind $Mod-c cycle_layout 1 vertical horizontal
+hc keybind $Mod-c cycle_layout 1 vertical horizontal max
 
 # mouse
 hc mouseunbind --all
 hc mousebind $Mod-Button1 move
 hc mousebind $Mod-Button3 zoom
-
-# focus
-hc keybind $Mod-BackSpace   cycle_monitor
-hc keybind $Mod-Tab         cycle_all +1
-hc keybind $Mod-Shift-Tab   cycle_all -1
 
 # theme
 hc attr theme.tiling.reset 1
@@ -121,10 +116,16 @@ hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#3E4A00'
 hc attr theme.active.outer_color '#9fbc00'
 hc attr theme.background_color '#2b2d31'
+hc attr theme.title_color 'white'
+hc attr theme.active.title_color 'black'
+hc attr theme.title_height 17
+hc attr theme.title_depth 6
+hc attr theme.title_when multiple_tabs
 
-hc set smart_window_surroundings off
-hc set smart_frame_surroundings off
+hc set smart_window_surroundings false
+hc set smart_frame_surroundings true
 hc set mouse_recenter_gap 0
+hc set tabbed_max true
 
 # rules
 hc unrule -F
