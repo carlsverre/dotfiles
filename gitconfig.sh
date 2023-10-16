@@ -2,7 +2,7 @@
 #
 
 # read existing includes
-INCLUDES=$(git config --global --get-all include.path)
+INCLUDES=$(git config --global --get-all include.path || echo "")
 
 # new includes to add
 NEW_INCLUDES="
