@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -eEuo pipefail
-
-ROOTDIR="$( cd "$(dirname $(dirname $(realpath "${BASH_SOURCE[0]}")))" && pwd )"
-git -C "${ROOTDIR}" pull --ff-only
-
-export UPDATE=true
-${ROOTDIR}/install.sh

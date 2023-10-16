@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+ARG1="${1}"
+if [[ "${ARG1}" == "--clear" ]]; then
+  git config --unset user.email
+elif [[ -n "${ARG1}" ]]; then
+  git config user.email "${ARG1}"
+else
+  echo "Usage: git set-email {--clear|EMAIL}"
+  echo "Current email: $(git config user.email)"
+  exit 1
+fi
