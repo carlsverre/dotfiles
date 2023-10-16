@@ -1,0 +1,33 @@
+[user]
+name = Carl Sverre
+email = 82591+carlsverre@users.noreply.github.com
+useConfigOnly = true
+
+[merge]
+defaultToUpstream = true
+
+[push]
+default = simple
+
+[pull]
+default = simple
+ff = only
+
+[rerere]
+enabled = true
+
+[init]
+defaultBranch = main
+
+[core]
+pager = less -FXRS -x4
+preloadIndex = true
+
+[color]
+diff = auto
+status = auto
+branch = auto
+interactive = auto
+
+[pager]
+color = true
