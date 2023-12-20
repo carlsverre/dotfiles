@@ -1,0 +1,2 @@
+#!/bin/bash
+colorpicker -od | tr -d '[:space:]' | xclip -i -selection clipboard

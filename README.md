@@ -12,6 +12,7 @@ on OSX. :)
 - [rofi](https://github.com/davatorium/rofi)
 - [herbstluftwm](https://herbstluftwm.org/)
   - Need to install from source
+  - Can wrap with sddm if needed
 - [polybar](https://github.com/polybar/polybar)
 - [google-chrome](https://www.google.com/intl/en_ca/chrome/)
 - [dunst](https://github.com/dunst-project/dunst)
@@ -19,6 +20,7 @@ on OSX. :)
 - [Nix package manager](https://nixos.org/download.html)
 - [maim](https://github.com/naelstrof/maim)
 - [colorpicker](git@github.com:ym1234/colorpicker.git)
+- [dragon](https://github.com/mwh/dragon)
 
 ## Fonts
 
@@ -41,9 +43,25 @@ on OSX. :)
 - Run `./install.sh` to sync dotfiles into the homedir
 - Run `./desktop.sh` to install lots of things
 
-## Other things I like to have
+## Other apps I like to have
 
 - [keybase](https://keybase.io/)
+- beeper
+- sioyek
+- telegram
+- UHK Agent
+- vscode
+- discord
+- morgen
+- chrome
+- tailscale
+- neofetch
+- obs
+- obsidian
+- spotify
+- slack
+- feh
+- zoom
 
 # Helpful Snippets
 

@@ -2,26 +2,10 @@
 
 set -eEuo pipefail
 
-export OS="$(uname)"
 export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # load helper functions
 source ${ROOTDIR}/lib.sh
-
-# install apt packages
-log_info "Updating apt packages"
-sudo apt update
-xargs sudo apt install -y <<EOF
-    build-essential
-    zlib1g-dev
-    libssl-dev
-
-    arandr
-    autorandr
-    feh
-    neofetch
-    playerctl
-EOF
 
 # install language sdks
 webinstall pathman
