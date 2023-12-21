@@ -1,0 +1,17 @@
+configuration {
+  font: "Hack Nerd Font 12";
+
+  timeout {
+    action: "kb-cancel";
+    delay:  0;
+  }
+
+  filebrowser {
+    directories-first: true;
+    sorting-method:    "name";
+  }
+}
+
+@theme "glue_pro_blue"
+
+window { width: 25%; }
