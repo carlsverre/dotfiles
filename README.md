@@ -90,6 +90,15 @@ git commit --amend --reset-author
 - Tested on Debian
 - Add files to `/usr/share/X11/xorg.conf.d`
 
+**Fix keyboard repeat rate**
+```xorg
+Section "InputClass"
+    Identifier "system-keyboard"
+    MatchIsKeyboard "on"
+    Option "AutoRepeat" "200 45"
+EndSection
+```
+
 **Kensington Expert Wireless TB**
 
 ```xorg

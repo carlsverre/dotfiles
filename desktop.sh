@@ -12,13 +12,15 @@ webinstall pathman
 
 webinstall node@lts &
 webinstall go-essentials@stable go &
-webinstall deno@stable &
 
 wait
 
 # rust
 if ! should_update && [[ -d "${HOME}/.cargo" ]]; then
     log_info "[ok] rust already installed"
+elif command -v rustup >/dev/null; then
+    rustup update
+    log_info "[++] rust updated"
 else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     log_info "[++] rust installed"
@@ -35,16 +37,16 @@ else
 fi
 
 # install neovim
-NEOVIM_VERSION="v0.9.1"
-NEOVIM_URL="https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/nvim-linux64.tar.gz"
-install_from_tar_gz ${NEOVIM_URL} "nvim-linux64/bin/nvim"
+# NEOVIM_VERSION="v0.9.1"
+# NEOVIM_URL="https://github.com/neovim/neovim/releases/download/${NEOVIM_VERSION}/nvim-linux64.tar.gz"
+# install_from_tar_gz ${NEOVIM_URL} "nvim-linux64/bin/nvim"
 
 # install neovim plugins
 nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugUpgrade" -c "PlugInstall" -c "PlugUpdate" -c "qa" && log_info "updated nvim plugins"
 
 # install neovim alias to vim
 # (don't use a bash alias because we want vim to be picked up by programs like fzf)
-safelink "${LOCALBIN}/vim" "${LOCALBIN}/nvim"
+safelink "${LOCALBIN}/vim" $(which nvim)
 
 # create neovim scratch spaces
 mkdir -p "${HOME}/.local/share/nvim/swp/"

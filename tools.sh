@@ -12,7 +12,7 @@ webinstall fzf &
 webinstall zoxide &
 
 # install direnv
-DIRENV_VERSION="v2.32.2"
+DIRENV_VERSION="v2.33.0"
 if is_mac; then
   DIRENV_URL="https://github.com/direnv/direnv/releases/download/${DIRENV_VERSION}/direnv.darwin-arm64"
 else

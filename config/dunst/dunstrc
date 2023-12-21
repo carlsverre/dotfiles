@@ -27,11 +27,7 @@
     always_run_script = true
     title = Dunst
     class = Dunst
-
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
+    font = Hack Nerd Font 12
 
 [urgency_low]
     timeout = 4
@@ -46,7 +42,7 @@
     frame_color = "#ba68c8"
 
 [urgency_critical]
-    timeout = 0
+    timeout = 12
     background = "#141c21"
     foreground = "#93a1a1"
     frame_color = "#ff7043"

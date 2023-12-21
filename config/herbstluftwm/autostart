@@ -9,6 +9,7 @@ hc emit_hook reload
 # startup scripts
 xsetroot -solid '#262626'
 picom &
+xset r rate 200 45
 
 # remove all existing keybindings
 hc keyunbind --all
@@ -20,6 +21,8 @@ hc keybind $Mod-Shift-q close
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-space spawn rofi -show run
 hc keybind $Mod-Return spawn alacritty
+
+hc keybind Ctrl-Shift-space spawn dunstctl close-all
 
 # audio
 hc keybind XF86AudioRaiseVolume spawn amixer -q sset Master 5%+ unmute
