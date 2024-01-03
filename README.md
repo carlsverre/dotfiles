@@ -90,12 +90,12 @@ git commit --amend --reset-author
 - Tested on Debian
 - Add files to `/usr/share/X11/xorg.conf.d`
 
-**Fix keyboard repeat rate**
+**Fix keyboard repeat rate** [Arch docs](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration#Using_AutoRepeat_configuration_option)
 ```xorg
 Section "InputClass"
     Identifier "system-keyboard"
     MatchIsKeyboard "on"
-    Option "AutoRepeat" "200 45"
+    Option "AutoRepeat" "200 22"
 EndSection
 ```
 
