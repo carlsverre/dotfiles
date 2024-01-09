@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-herbstclient detect_monitors
-${HOME}/.config/herbstluftwm/panel.sh
-
 PRIMARY_RESOLUTION=$(xrandr | awk -F'[ +]' '/primary/{print $4}')
 if [[ -d ~/.wallpapers/${PRIMARY_RESOLUTION} ]]; then
     feh --randomize --bg-fill ~/.wallpapers/${PRIMARY_RESOLUTION}

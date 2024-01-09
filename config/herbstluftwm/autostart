@@ -30,7 +30,6 @@ hc keybind XF86AudioLowerVolume spawn amixer -q sset Master 5%- unmute
 hc keybind XF86AudioMute spawn amixer -q sset Master toggle
 
 # display
-hc keybind $Mod-F7 spawn autorandr -cf
 hc keybind XF86MonBrightnessUp spawn xbacklight +15
 hc keybind XF86MonBrightnessDown spawn xbacklight -15
 
@@ -172,13 +171,8 @@ hc unlock
 # load monitors
 hc detect_monitors
 
-# run autorandr
-autorandr -cf
+# run polybar
+~/.config/herbstluftwm/panel.sh
 
-# if autorandr didn't detect the config, run panels manually
-if [ -z "$(autorandr --current)" ]; then
-    panel=~/.config/herbstluftwm/panel.sh
-    if [ -x "$panel" ]; then
-        "$panel"
-    fi
-fi
+# set wallpaper
+~/.config/herbstluftwm/wallpaper.sh
