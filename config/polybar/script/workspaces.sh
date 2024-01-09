@@ -46,9 +46,9 @@ herbstclient --idle "tag_*" 2>/dev/null | {
             echo "%{F-}%{B-}"
         } | tr -d "\n"
 
-    echo
+        echo
 
-    # wait for next event from herbstclient --idle
-    read -r || break
-done
+        # wait for next event from herbstclient --idle
+        read -r || break
+    done
 } 2>/dev/null
