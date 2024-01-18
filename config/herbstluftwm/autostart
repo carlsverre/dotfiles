@@ -60,22 +60,22 @@ hc keybind $Mod-Control-j       resize down +$resizestep
 hc keybind $Mod-Control-k       resize up +$resizestep
 hc keybind $Mod-Control-l       resize right +$resizestep
 
-# load default layout
-if [[ $(hc attr tags.focus.client_count) -eq 0 ]]; then
-    hc load "$(cat "$HOME/.config/herbstluftwm/layout/workhorse")"
-fi
-
 # tags
 tag_names=( {1..9} )
 tag_keys=( {1..9} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in "${!tag_names[@]}" ; do
-    hc add "${tag_names[$i]}"
+    tag="${tag_names[$i]}"
+    hc add "$tag"
     key="${tag_keys[$i]}"
     if ! [ -z "$key" ] ; then
         hc keybind "$Mod-$key" use_index "$i"
         hc keybind "$Mod-Shift-$key" move_index "$i"
+    fi
+    # load default layout
+    if [[ $(hc attr tags.by-name.$tag.client_count) -eq 0 ]]; then
+        hc load "$tag" "$(cat "$HOME/.config/herbstluftwm/layout/workhorse")"
     fi
 done
 
