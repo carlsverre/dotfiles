@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 # check to see if the gh command is installed and logged in, otherwise exit silently
 if ! command -v gh &>/dev/null || ! gh auth status &>/dev/null; then
     echo "%{F#FD7D70}check gh auth%{F-}"
     exit 0
 fi
+
+# wait for internet to come up
+until ping -c1 www.google.com >/dev/null 2>&1; do sleep 0.1; done
 
 FROM=$(date -Iseconds -d "7 days ago")
 TO=$(date -Iseconds)

@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# wait for internet to come up
+until ping -c1 www.google.com >/dev/null 2>&1; do sleep 0.1; done
+
 URL=$(cat ~/.co2-click-api)
 DATA=$(curl -s ${URL})
 CO2=$(echo "${DATA}" | jq  -r .lastSampleCo2)
