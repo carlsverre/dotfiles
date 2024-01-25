@@ -6,9 +6,6 @@ if ! command -v gh &>/dev/null || ! gh auth status &>/dev/null; then
     exit 0
 fi
 
-# wait for internet to come up
-until ping -c1 www.google.com >/dev/null 2>&1; do sleep 0.1; done
-
 FROM=$(date -Iseconds -d "7 days ago")
 TO=$(date -Iseconds)
 
@@ -29,7 +26,15 @@ QUERY=$(
 EOF
 )
 
-DATA=$(gh api graphql -f query="${QUERY}")
+DATA=""
+while true; do
+    DATA=$(gh api graphql -f query="${QUERY}" 2>/dev/null)
+    if [[ $? -eq 0 ]]; then
+        break
+    else
+        sleep 0.5
+    fi
+done
 
 COMPLETE_ICON=""
 INCOMPLETE_ICON=""
