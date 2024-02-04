@@ -6,7 +6,7 @@ if ! command -v gh &>/dev/null || ! gh auth status &>/dev/null; then
     exit 0
 fi
 
-FROM=$(date -Iseconds -d "7 days ago")
+FROM=$(date -Iseconds -d "6 days ago")
 TO=$(date -Iseconds)
 
 QUERY=$(
@@ -16,6 +16,7 @@ QUERY=$(
             contributionCalendar {
                 weeks {
                     contributionDays {
+                        weekday
                         contributionCount
                         color
                     }
@@ -41,11 +42,17 @@ INCOMPLETE_ICON=""
 
 echo -n " "
 
+JQ_QUERY='
+    .data.viewer.contributionsCollection.contributionCalendar.weeks[].contributionDays[]
+    | [.weekday, .color, .contributionCount]
+    | @tsv
+'
+
 # this is a polybar script, output a colored circle for each day in $DATA
-echo "${DATA}" | jq -r '.data.viewer.contributionsCollection.contributionCalendar.weeks[].contributionDays[] | [.color, .contributionCount] | @tsv' | while read -r color contributionCount; do
+echo "${DATA}" | jq -r "${JQ_QUERY}" | while read -r weekday color contributionCount; do
     if [[ $contributionCount -gt 0 ]]; then
         echo -n "%{F${color}}${COMPLETE_ICON}%{F-}%{O2}"
-    else
+    elif [[ ${weekday} != 0 && ${weekday} != 6 ]]; then # ignore missing contributions on weekends
         echo -n "%{F${color}}${INCOMPLETE_ICON}%{F-}%{O2}"
     fi
 done
