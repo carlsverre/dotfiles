@@ -21,6 +21,7 @@ on OSX. :)
 - [maim](https://github.com/naelstrof/maim)
 - [colorpicker](git@github.com:ym1234/colorpicker.git)
 - [dragon](https://github.com/mwh/dragon)
+- [difftastic](https://difftastic.wilfred.me.uk/)
 
 ## Fonts
 
