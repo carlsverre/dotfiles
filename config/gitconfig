@@ -31,13 +31,3 @@ interactive = auto
 
 [pager]
 color = true
-
-[diff]
-tool = difftastic
-external = difft --display inline --background light
-
-[difftool]
-prompt = false
-
-[difftool "difftastic"]
-cmd = difft --display inline --background light "$LOCAL" "$REMOTE"
