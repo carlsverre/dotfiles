@@ -17,7 +17,7 @@ hc keyunbind --all
 # keybindings
 Mod=Super    # Use super as the main modifier
 
-hc keybind $Mod-Shift-q close
+hc keybind $Mod-q close
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-space spawn rofi -show run
 hc keybind $Mod-Return spawn alacritty
@@ -35,30 +35,30 @@ hc keybind XF86MonBrightnessDown spawn xbacklight -15
 
 # basic movement in tiling and floating mode
 # focusing clients
-hc keybind $Mod-h     focus left
-hc keybind $Mod-j     focus down
-hc keybind $Mod-k     focus up
-hc keybind $Mod-l     focus right
+hc keybind $Mod-Left    focus left
+hc keybind $Mod-Down    focus down
+hc keybind $Mod-Up      focus up
+hc keybind $Mod-Right   focus right
 
 # moving clients in tiling and floating mode
-hc keybind $Mod-Shift-h     shift --level=tabs left
-hc keybind $Mod-Shift-j     shift --level=tabs down
-hc keybind $Mod-Shift-k     shift --level=tabs up
-hc keybind $Mod-Shift-l     shift --level=tabs right
+hc keybind $Mod-Shift-Left      shift --level=tabs left
+hc keybind $Mod-Shift-Down      shift --level=tabs down
+hc keybind $Mod-Shift-Up        shift --level=tabs up
+hc keybind $Mod-Shift-Right     shift --level=tabs right
 
 # tab movement
-hc keybind $Mod-Tab         focus --level=tabs right
-hc keybind $Mod-Shift-Tab   focus --level=tabs left
+hc keybind $Mod-Ctrl-Next   focus --level=tabs right
+hc keybind $Mod-Ctrl-Prior  focus --level=tabs left
 
 # explode the current frame
 hc keybind $Mod-Control-space split explode
 
 # resizing frames and floating clients
 resizestep=0.02
-hc keybind $Mod-Control-h       resize left +$resizestep
-hc keybind $Mod-Control-j       resize down +$resizestep
-hc keybind $Mod-Control-k       resize up +$resizestep
-hc keybind $Mod-Control-l       resize right +$resizestep
+hc keybind $Mod-Control-Left    resize left +$resizestep
+hc keybind $Mod-Control-Down    resize down +$resizestep
+hc keybind $Mod-Control-Up      resize up +$resizestep
+hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # tags
 tag_names=( {1..9} )
