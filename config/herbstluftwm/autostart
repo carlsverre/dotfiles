@@ -92,8 +92,8 @@ hc keybind $Mod-c cycle_layout 1 vertical horizontal max
 
 # mouse
 hc mouseunbind --all
-hc mousebind $Mod-Button1 move
-hc mousebind $Mod-Button3 zoom
+hc mousebind Ctrl-Shift-Button1 move
+hc mousebind Ctrl-Shift-Button3 zoom
 
 # theme
 hc attr theme.tiling.reset 1
