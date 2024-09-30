@@ -7,11 +7,11 @@ export ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # load helper functions
 source ${ROOTDIR}/lib.sh
 
-# install language sdks
 webinstall pathman
+webinstall go
 
+webinstall go-essentials@stable &
 webinstall node@lts &
-webinstall go-essentials@stable go &
 
 wait
 
