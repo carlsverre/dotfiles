@@ -62,20 +62,18 @@ hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # tags
 tag_names=( {1..9} )
-tag_keys=( {1..9} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in "${!tag_names[@]}" ; do
     tag="${tag_names[$i]}"
     hc add "$tag"
-    key="${tag_keys[$i]}"
-    if ! [ -z "$key" ] ; then
-        hc keybind "$Mod-$key" use_index "$i"
-        hc keybind "$Mod-Shift-$key" move_index "$i"
-    fi
-    # load default layout
-    if [[ $(hc attr tags.by-name.$tag.client_count) -eq 0 ]]; then
-        hc load "$tag" "$(cat "$HOME/.config/herbstluftwm/layout/workhorse")"
+    hc keybind "$Mod-$tag" use_index "$i"
+    hc keybind "$Mod-Shift-$tag" move_index "$i"
+    # load default layout on all tags but the first
+    if [[ "$tag" -ne 1 ]]; then
+        if [[ $(hc attr tags.by-name.$tag.client_count) -eq 0 ]]; then
+            hc load "$tag" "$(cat "$HOME/.config/herbstluftwm/layout/workhorse")"
+        fi
     fi
 done
 
@@ -157,6 +155,7 @@ hc rule class=Blueman-manager floating=on floatplacement=center
 hc rule class=Steam floating=on floatplacement=center
 hc rule name=Steam floating=on floatplacement=center
 hc rule class~"steam_app.*" floating=on floatplacement=center
+hc rule class="steam" floating=on floatplacement=center
 
 hc rule fixedsize floating=on floatplacement=smart
 
