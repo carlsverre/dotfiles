@@ -60,6 +60,9 @@ hc keybind $Mod-Control-Down    resize down +$resizestep
 hc keybind $Mod-Control-Up      resize up +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
 
+# switch to last tag
+hc keybind Alt-Tab   use_previous
+
 # tags
 tag_names=( {1..9} )
 
