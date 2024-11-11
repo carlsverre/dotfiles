@@ -25,6 +25,7 @@ done
 # install dotfiles
 safelink "${HOME}/.Xresources" "${ROOTDIR}/config/xresources"
 safelink "${HOME}/.xsessionrc" "${ROOTDIR}/config/xsessionrc"
+safelink "${HOME}/.dircolors" "${ROOTDIR}/config/dircolors"
 safelink "${HOME}/.zshrc" "${ROOTDIR}/config/zsh/zshrc"
 
 # install tools

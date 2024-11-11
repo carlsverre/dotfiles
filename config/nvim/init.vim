@@ -4,7 +4,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'LnL7/vim-nix'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'lifepillar/vim-solarized8'
+Plug 'dracula/vim'
 Plug 'w0rp/ale'
 Plug 'davidhalter/jedi-vim'
 Plug 'fatih/vim-go'
@@ -130,7 +130,7 @@ nmap Q <Nop>
 
 set termguicolors
 set background=light
-colorscheme solarized8
+colorscheme dracula
 
 if filereadable(expand("~/.nvim-background"))
     exe 'source' expand("~/.nvim-background")
@@ -303,7 +303,7 @@ let g:jedi#force_py_version = 3
 "------  Vim Airline ------"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#hunks#enabled = 0
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'dracula'
 
 "------  NERDTree Options  ------"
 
