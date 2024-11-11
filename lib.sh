@@ -30,7 +30,7 @@ function is_mac {
 function canonical_path {
     local path="$1"
     if is_mac; then
-        python -c "import os;print(os.path.realpath('$path'))"
+        python3 -c "import os;print(os.path.realpath('$path'))"
     else
         readlink -f "$path"
     fi
