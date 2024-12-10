@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-killall dunst
+dunstctl reload
 notify-send -u low "Current Time" "$(date +"%a %-d %b at %H:%M")";
 notify-send -u critical another one;
-notify-send its ok;
-notify-send its ok;
+notify-send header footer;
+notify-send header footer;
