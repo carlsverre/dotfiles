@@ -10,6 +10,7 @@ fi
 webinstall fd &
 webinstall fzf &
 webinstall zoxide &
+webinstall sqlpkg &
 
 # install direnv
 DIRENV_VERSION="v2.34.0"

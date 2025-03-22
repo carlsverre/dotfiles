@@ -1,3 +1,3 @@
 #!/bin/bash
-source "${HOME}/.config/zsh/custom/3-path.zsh"
+[ -s "$HOME/.config/zsh/custom/2-path.zsh" ] && source "${HOME}/.config/zsh/custom/2-path.zsh"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
