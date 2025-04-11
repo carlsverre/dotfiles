@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-exec /opt/google/chrome/google-chrome "--profile-directory=Profile 2" --app-id=kjgfgldnnfoeklkmfkjfagphfepbbdan
+
+EMAIL="carl@orbitinghail.dev"
+MEET_URL="https://meet.google.com"
+
+exec /opt/google/chrome/google-chrome --app="$MEET_URL?authuser=$EMAIL"
