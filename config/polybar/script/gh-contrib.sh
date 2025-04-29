@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
 # check to see if the gh command is installed and logged in, otherwise exit silently
-if ! command -v gh &>/dev/null || ! gh auth status &>/dev/null; then
+if ! command -v gh &>/dev/null; then
     echo "%{F#FD7D70}check gh auth%{F-}"
     exit 0
 fi
+
+# Wait until “gh auth status” succeeds (exit-code 0) – retry every 0.5 s.
+while ! gh auth status &>/dev/null; do
+    sleep 0.5
+done
 
 FROM=$(date -Iseconds -d "6 days ago")
 TO=$(date -Iseconds)
