@@ -8,10 +8,11 @@ defaultToUpstream = true
 
 [push]
 default = simple
-
-[pull]
-default = simple
+autoSetupRemote = true
 ff = only
+
+[branch]
+autoSetupMerge = simple
 
 [rerere]
 enabled = true
