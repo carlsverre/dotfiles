@@ -1,4 +1,4 @@
-export LANG=en_US.UTF-8
+export LANG=en_CA.UTF-8
 export WEBI_WELCOME=0
 export PAGER="less -FXRS -x4"
 
