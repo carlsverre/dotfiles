@@ -1,0 +1,67 @@
+#!/bin/bash
+
+check_pactl() {
+    timeout 1s pactl info >/dev/null 2>&1
+    return $?
+}
+
+check_easyeffects() {
+    pgrep -x easyeffects >/dev/null 2>&1
+    return $?
+}
+
+restart_services() {
+    echo "Restarting audio services..."
+    systemctl --user restart pipewire
+    systemctl --user restart pipewire-pulse
+    systemctl --user restart wireplumber
+    systemctl --user restart easyeffects
+    echo "Audio services restarted."
+    
+    echo "Reloading window manager..."
+    hc reload
+    
+    echo
+    echo "Verifying services after restart..."
+    sleep 2
+    
+    if check_pactl; then
+        echo "✓ PulseAudio connection OK."
+    else
+        echo "✗ PulseAudio connection still failing."
+    fi
+    
+    if check_easyeffects; then
+        echo "✓ EasyEffects is running."
+    else
+        echo "✗ EasyEffects is not running."
+    fi
+}
+
+echo "Checking PulseAudio/PipeWire bridge..."
+if ! check_pactl; then
+    echo "PulseAudio connection failed or timed out."
+    needs_restart=true
+else
+    echo "PulseAudio connection OK."
+fi
+
+echo "Checking EasyEffects..."
+if ! check_easyeffects; then
+    echo "EasyEffects is not running."
+    needs_restart=true
+else
+    echo "EasyEffects is running."
+fi
+
+if [ "$needs_restart" = true ]; then
+    read -p "Audio issues detected. Restart audio services? (y/N): " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        restart_services
+    else
+        echo "No action taken."
+    fi
+else
+    echo "All audio services appear to be working correctly."
+fi
