@@ -42,7 +42,7 @@ fi
 # install_from_tar_gz ${NEOVIM_URL} "nvim-linux64/bin/nvim"
 
 # install neovim plugins
-nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugUpgrade" -c "PlugInstall" -c "PlugUpdate" -c "qa" && log_info "updated nvim plugins"
+nvim -es -u "${HOME}/.config/nvim/init.vim" -i NONE -c "PlugUpgrade" -c "PlugInstall" -c "PlugUpdate" -c "CocUpdateSync" -c "qa" && log_info "updated nvim plugins"
 
 # install neovim alias to vim
 # (don't use a bash alias because we want vim to be picked up by programs like fzf)

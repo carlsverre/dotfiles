@@ -19,7 +19,7 @@ restart_services() {
     echo "Audio services restarted."
     
     echo "Reloading window manager..."
-    hc reload
+    herbstclient reload
     
     echo
     echo "Verifying services after restart..."
