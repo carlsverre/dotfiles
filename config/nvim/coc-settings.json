@@ -1,5 +1,4 @@
 {
-  "diagnostic.displayByAle": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -7,13 +6,16 @@
       "filetypes": ["go"]
     }
   },
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "rust",
+    "go"
   ],
   "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true
+  "coc.preferences.formatOnType": true,
+  "inlayHint.enable": false
 }

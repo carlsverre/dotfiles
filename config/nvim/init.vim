@@ -1,31 +1,19 @@
 call plug#begin("~/.local/share/nvim/plugged")
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'LnL7/vim-nix'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'dracula/vim'
-Plug 'w0rp/ale'
-Plug 'davidhalter/jedi-vim'
 Plug 'fatih/vim-go'
-Plug 'hdima/python-syntax'
 Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdtree'
 Plug 'mg979/vim-visual-multi'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'jparise/vim-graphql'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'lyuts/vim-rtags'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'plasticboy/vim-markdown'
-Plug 'cheap-glitch/vim-v'
-Plug 'ledger/vim-ledger'
 
 " Initialize plugin system
 call plug#end()
@@ -38,6 +26,9 @@ set nowrap                          " disable word wrap
 set vb                              " visual bell
 set showmatch                       " show matching bracket
 set conceallevel=2                  " support concealing
+set updatetime=300                  " faster updates
+set signcolumn=yes                  " always show the sign column
+set scrolloff=100                   " keep lines visible around cursor
 
 set laststatus=2                    " always use a status line
 
@@ -70,6 +61,11 @@ filetype indent on
 filetype plugin on
 
 set encoding=utf-8
+
+"------  General keybinds  ------"
+
+" ctrl-s -> save if changed
+nnoremap <silent><c-s> :<c-u>update<cr>
 
 "------  Searching  ------"
 
@@ -282,23 +278,11 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-"------  Jedi ------"
+" Symbol renaming
+nmap <F2> <Plug>(coc-rename)
 
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_enabled = 0
-let g:jedi#show_call_signatures = "0"
-
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#goto_stubs_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = ""
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = ""
-
-let g:jedi#force_py_version = 3
+" Remap keys for applying code actions at the cursor position
+nmap <c-.>  <Plug>(coc-codeaction-cursor)
 
 "------  Vim Airline ------"
 let g:airline_powerline_fonts = 1
@@ -317,58 +301,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 "------  GitGutter  ------"
 highlight clear SignColumn
-
-"------  ALE  ------"
-
-function! VfmtFix(buffer)
-    return {
-    \   'command': 'v fmt -w %t',
-    \   'read_temporary_file': 1,
-    \}
-endfunction
-
-call ale#fix#registry#Add("vfmt", "VfmtFix", ["vlang"], "vlang")
-
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'css': ['prettier'],
-\   'scss': ['prettier'],
-\   'python': ['black'],
-\   'reason': ['refmt'],
-\   'vlang': ['vfmt'],
-\}
-
-let g:ale_linters = {
-\   'python': [
-\       'flake8',
-\   ],
-\   'javascript': [
-\       'eslint',
-\   ],
-\   'typescript': [
-\       'eslint',
-\   ],
-\   'go': [
-\       'gometalinter',
-\       'go build',
-\   ],
-\   'rust': [
-\       'analyzer',
-\   ],
-\}
-
-let g:ale_disable_lsp = 1
-let g:ale_linters_explicit = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_javascript_flow_use_global = 1
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_reasonml_refmt_executable = 'bsrefmt'
 
 "------ Go ------"
 let g:go_highlight_types = 1
@@ -392,34 +324,6 @@ let g:VM_manual_infoline = 0
 "------  vim-rooter   ------"
 let g:rooter_patterns = ['.vim-rooter', '.git', '.git/']
 
-"------  rtags  ------"
-
-let g:rtagsUseDefaultMappings = 0
-let g:rtagsUseLocationList = 0
-
-augroup RtagsMappings
-    au!
-    " SymbolInfo is broken in rtags :(
-    " au FileType cpp noremap K :call rtags#SymbolInfo()<CR>
-    au FileType cpp noremap <Leader>d :call rtags#JumpTo(g:SAME_WINDOW)<CR>
-    au FileType cpp noremap <Leader>D :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
-
-    au FileType cpp noremap <Leader>rp :call rtags#JumpToParent()<CR>
-    au FileType cpp noremap <Leader>rf :call rtags#FindRefs()<CR>
-    au FileType cpp noremap <Leader>rF :call rtags#FindRefsCallTree()<CR>
-    au FileType cpp noremap <Leader>rn :call rtags#FindRefsByName(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
-    au FileType cpp noremap <Leader>rs :call rtags#FindSymbolsOfWordUnderCursor()<CR>
-    au FileType cpp noremap <Leader>rS :call rtags#FindSymbols(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
-    au FileType cpp noremap <Leader>rr :call rtags#ReindexFile()<CR>
-    au FileType cpp noremap <Leader>rl :call rtags#ProjectList()<CR>
-    au FileType cpp noremap <Leader>rw :call rtags#RenameSymbolUnderCursor()<CR>
-    au FileType cpp noremap <Leader>rv :call rtags#FindVirtuals()<CR>
-    au FileType cpp noremap <Leader>rb :call rtags#JumpBack()<CR>
-    au FileType cpp noremap <Leader>rh :call rtags#ShowHierarchy()<CR>
-    au FileType cpp noremap <Leader>rC :call rtags#FindSuperClasses()<CR>
-    au FileType cpp noremap <Leader>rc :call rtags#FindSubClasses()<CR>
-    au FileType cpp noremap <Leader>rd :call rtags#Diagnostics()<CR>
-augroup END
 
 "------  fzf w/ ripgrep support  ------"
 
@@ -462,9 +366,6 @@ command! -bang -nargs=* Rg
 nnoremap <leader>g :Rg<space>
 nnoremap <expr> <leader>G ':RG '.expand('<cword>').'<CR>'
 xnoremap <expr> <leader>G ':RG '.expand('<cword>').'<CR>'
-
-"------  rust  ------"
-let g:rustfmt_autosave = 1
 
 "------  markdown  ------"
 let g:vim_markdown_emphasis_multiline = 0
