@@ -73,7 +73,7 @@ function safelink {
         log_info "[++] ${pointer} -> ${target}"
     fi
 
-    if [[ "${REMOTE_CONTAINERS}" == "true" ]]; then
+    if [[ "${REMOTE_CONTAINERS}" == "true" || "${CODESPACES}" == "true" ]]; then
         # in a devcontainer we just overwrite anything there
         ln -f -s "$target" "$pointer"
         log_info "[++] ${pointer} -> ${target}"
