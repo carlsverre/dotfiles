@@ -44,8 +44,8 @@ zinit snippet OMZP::zoxide
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-syntax-highlighting
 
-zinit light ${ZSH_HOME}/theme
-zinit light ${ZSH_HOME}/custom
+zinit load ${ZSH_HOME}/theme
+zinit load ${ZSH_HOME}/custom
 
 # setup completions
 autoload -Uz compinit
