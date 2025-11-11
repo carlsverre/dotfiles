@@ -33,19 +33,18 @@ zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
 zinit snippet OMZL::vcs_info.zsh
 
-# oh-my-zsh plugins
+# load custom config and theme
+zinit light ${ZSH_HOME}/theme
+zinit light ${ZSH_HOME}/custom
+
+# load plugins
 zinit snippet OMZP::git
-zinit snippet OMZP::docker
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::direnv
 zinit snippet OMZP::zoxide
-
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-syntax-highlighting
-
-zinit load ${ZSH_HOME}/theme
-zinit load ${ZSH_HOME}/custom
 
 # setup completions
 autoload -Uz compinit
