@@ -6,17 +6,52 @@ if [[ ${PROFILE_ZSH:0} -eq 1 ]]; then zmodload zsh/zprof; fi
 
 export ZSH_HOME="${HOME}/.config/zsh"
 
-source "${ZSH_HOME}/antigen.zsh"
-antigen init "${ZSH_HOME}/antigenrc"
+# install zinit if needed
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-eval "$(zoxide init zsh --cmd j)"
-eval "$(direnv hook zsh)"
+# plugin config
+ZOXIDE_CMD_OVERRIDE=j
+setopt promptsubst
 
-if command -v dircolors >/dev/null; then
-    if [[ -f "~/.dircolors" ]]; then
-        eval $(dircolors "~/.dircolors")
-    fi
-fi
+# oh-my-zsh library
+zinit snippet OMZL::async_prompt.zsh
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::directories.zsh
+zinit snippet OMZL::functions.zsh
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::grep.zsh
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::misc.zsh
+zinit snippet OMZL::prompt_info_functions.zsh
+zinit snippet OMZL::spectrum.zsh
+zinit snippet OMZL::termsupport.zsh
+zinit snippet OMZL::theme-and-appearance.zsh
+zinit snippet OMZL::vcs_info.zsh
+
+# oh-my-zsh plugins
+zinit snippet OMZP::git
+zinit snippet OMZP::docker
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::direnv
+zinit snippet OMZP::zoxide
+
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-syntax-highlighting
+
+zinit light ${ZSH_HOME}/theme
+zinit light ${ZSH_HOME}/custom
+
+# setup completions
+autoload -Uz compinit
+compinit
+
+zinit cdreplay -q
 
 # webinstall depends on pathman which used to be called envman(??)
 # anyways, it adds this line if we don't add it
