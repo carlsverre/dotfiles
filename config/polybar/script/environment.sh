@@ -17,4 +17,4 @@ if [[ ${CO2} -ge 1000 ]]; then
     CO2_ICON="${BAD_CO2_ICON}"
 fi
 
-echo "${CO2_ICON}%{O12}${CO2} CO2%{O15}${HUMIDITY_ICON}%{O7}${HUMIDITY}%"
+echo "${CO2_ICON}%{O12}${CO2} CO2 %{O15}${HUMIDITY_ICON}%{O7}${HUMIDITY}%"
