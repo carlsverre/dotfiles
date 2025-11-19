@@ -51,6 +51,9 @@ class Timer:
     def tick(self):
         self.previous = time.time()
 
+    def finished(self):
+        return self.time <= 0
+
     def format_time(self):
         day_factor = 86400
         hour_factor = 3600
@@ -85,21 +88,19 @@ class Timer:
     def update(self):
         now = time.time()
         delta = now - self.previous
-        self.time -= delta
+        self.time = max(0, self.time - delta)
 
         # Send a notification when timer reaches 0
-        if not self.notified and self.time < 0:
+        if not self.notified and self.finished():
             self.notified = True
             try:
                 call(
                     [
                         "notify-send",
                         "-t",
-                        "0",
-                        "-u",
-                        "critical",
+                        "10000",
                         "Pomodoro",
-                        "Timer reached zero",
+                        "Ding ding ding!",
                     ],
                     stdout=DEVNULL,
                     stderr=DEVNULL,
@@ -146,6 +147,11 @@ class Status:
         # This ensures the timer counts time since the last iteration
         # and not since it was initialized
         self.timer.tick()
+
+        # Auto-advance to next timer when current timer reaches zero
+        if self.active and self.timer.finished():
+            self.next_timer()
+            self.toggle() # autostart the new timer
 
     def change(self, op, seconds):
         if self.locked:
