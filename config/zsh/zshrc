@@ -17,6 +17,9 @@ source "${ZINIT_HOME}/zinit.zsh"
 ZOXIDE_CMD_OVERRIDE=j
 setopt promptsubst
 
+# disable git async prompt, since we are wrapping it with our own that also checks jj
+zstyle ':omz:alpha:lib:git' async-prompt no
+
 # oh-my-zsh library
 zinit snippet OMZL::async_prompt.zsh
 zinit snippet OMZL::completion.zsh
@@ -39,6 +42,7 @@ zinit light ${ZSH_HOME}/custom
 
 # load plugins
 zinit snippet OMZP::git
+zinit snippet OMZP::jj
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::direnv
