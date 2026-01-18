@@ -30,12 +30,12 @@ _custom_vcs_info_async() {
   )' -T 'separate(" ", bookmarks, remote_bookmarks)' | cut -d ' ' -f 1`
 
   # color 8 is apparently gray
-  grey="%F{8}"
+  fg_gray="\e[38;5;8m"
 
   JJ_INFO="%{$fg_bold[cyan]%}(%{$fg_bold[red]%}"
   JJ_INFO+="$bookmark "
   JJ_INFO+="%{$fg_bold[magenta]%}$rev_prefix%{$reset_color%}"
-  JJ_INFO+="%F{8}$rev_rest%{$reset_color%}"
+  JJ_INFO+="%{$fg_gray%}$rev_rest%{$reset_color%}"
   JJ_INFO+="%{$fg_bold[cyan]%})%{$reset_color%}"
 
   # echo metadata
