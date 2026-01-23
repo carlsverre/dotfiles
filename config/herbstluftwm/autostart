@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 hc() {
     herbstclient "$@"
@@ -8,7 +8,7 @@ hc emit_hook reload
 
 # startup scripts
 xsetroot -solid '#262626'
-picom &
+picom -b --backend xrender
 xset r rate 200 45
 
 # remove all existing keybindings

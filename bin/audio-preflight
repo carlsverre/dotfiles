@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 check_pactl() {
     timeout 1s pactl info >/dev/null 2>&1

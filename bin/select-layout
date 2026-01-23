@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LAYOUT_ROOT="$HOME/.config/herbstluftwm/layout"
 SELECTED=$(find "${LAYOUT_ROOT}" -type f -printf '%P\n' | rofi -dmenu)
