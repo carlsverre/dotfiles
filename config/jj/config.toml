@@ -10,7 +10,7 @@ merge-editor = "meld"
 diff-editor = "meld"
 
 [revsets]
-log = "present(@) | ancestors(immutable_heads()::, 2) | present(trunk())"
+log = "local"
 
 [revset-aliases]
 'user()' = 'user(*carl*sverre*)'
@@ -18,7 +18,9 @@ log = "present(@) | ancestors(immutable_heads()::, 2) | present(trunk())"
 'unpushed' = "remote_bookmarks()::"
 'local' = "(remote_bookmarks()..@)::"
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'view' = "present(@) | ancestors(immutable_heads()::, 2) | present(trunk())"
 
 [aliases]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
-local = ["log", "-r", "local"]
+lv = ["log", "-r", "view"]
+ls = ["log", "--stat", "-r", "view"]
