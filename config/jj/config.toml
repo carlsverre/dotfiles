@@ -16,7 +16,7 @@ log = "local"
 'user()' = 'user(*carl*sverre*)'
 'user(x)' = 'author(x) | committer(x)'
 'unpushed' = "remote_bookmarks()::"
-'local' = "(remote_bookmarks()..@)::"
+'local' = "(closest_bookmark(@)::@)::"
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
 'view' = "present(@) | ancestors(immutable_heads()::, 2) | present(trunk())"
 
