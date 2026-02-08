@@ -6,8 +6,6 @@ email = "82591+carlsverre@users.noreply.github.com"
 
 [ui]
 default-command = "log"
-merge-editor = "meld"
-diff-editor = "meld"
 
 [revsets]
 log = "local"
