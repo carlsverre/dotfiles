@@ -11,14 +11,19 @@ default-command = "log"
 log = "local"
 
 [revset-aliases]
+'HEAD' = '@-'
 'user()' = 'user(*carl*sverre*)'
 'user(x)' = 'author(x) | committer(x)'
 'unpushed' = "remote_bookmarks()::"
-'local' = "(closest_bookmark(@)::@)::"
+'local' = "parents(closest_bookmark(@), 2)::@ | @::"
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
-'view' = "present(@) | ancestors(immutable_heads()::, 2) | present(trunk())"
+'view' = "local | ::tracked_remote_bookmarks() | ::present(trunk())"
+'full' = "::@ | @:: | ::bookmarks() | ::immutable_heads() | ::present(trunk())"
 
 [aliases]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 lv = ["log", "-r", "view"]
-ls = ["log", "--stat", "-r", "view"]
+lf = ["log", "-r", "full"]
+
+[templates]
+git_push_bookmark = '"carlsverre/push-" ++ change_id.short()'
