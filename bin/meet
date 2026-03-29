@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-EMAIL="carl@orbitinghail.dev"
+EMAIL="carl.sverre@antithesis.com"
 MEET_URL="https://meet.google.com"
 
 exec /opt/google/chrome/google-chrome --app="$MEET_URL?authuser=$EMAIL"
