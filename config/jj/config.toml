@@ -24,6 +24,7 @@ log = "local"
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 lv = ["log", "-r", "view"]
 lf = ["log", "-r", "full"]
+fetch = ['git', 'fetch', '--all-remotes']
 
 [templates]
 git_push_bookmark = '"carlsverre/push-" ++ change_id.short()'
