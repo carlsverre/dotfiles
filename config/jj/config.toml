@@ -14,16 +14,14 @@ log = "local"
 'HEAD' = '@-'
 'user()' = 'user(*carl*sverre*)'
 'user(x)' = 'author(x) | committer(x)'
-'unpushed' = "remote_bookmarks()::"
-'local' = "parents(closest_bookmark(@), 2)::@ | @:: | parents(@, 2)::@"
+'local' = "present(trunk())::@ | parents(@, 3)::@"
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
-'view' = "local | ::tracked_remote_bookmarks() | ::present(trunk())"
-'full' = "::@ | @:: | ::bookmarks() | ::immutable_heads() | ::present(trunk())"
+'view' = "local | ::bookmarks() | ::present(trunk())"
 
 [aliases]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 lv = ["log", "-r", "view"]
-lf = ["log", "-r", "full"]
+lf = ["log", "-r", "::"]
 fetch = ['git', 'fetch', '--all-remotes']
 
 [templates]
