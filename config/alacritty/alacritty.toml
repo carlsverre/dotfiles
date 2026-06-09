@@ -127,6 +127,11 @@ action = "CreateNewWindow"
 key = "N"
 mods = "Command"
 
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
+
 [scrolling]
 history = 20000
 
