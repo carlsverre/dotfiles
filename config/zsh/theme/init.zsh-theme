@@ -15,7 +15,7 @@ _custom_vcs_info_async() {
   fi
 
   # commit the working tree
-  jj util snapshot
+  jj util snapshot --quiet
 
   # load current revision
   eval `_jj log --no-graph --limit 1 -r @ -T 'separate(" ",
