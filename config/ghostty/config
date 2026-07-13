@@ -1,0 +1,45 @@
+# --- Colors (Dracula) ---
+background = 282a36
+foreground = f8f8f2
+
+cursor-color = f8f8f2
+cursor-text  = 282a36
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+selection-foreground = cell-foreground
+selection-background = 44475a
+
+# normal
+palette = 0=#21222c
+palette = 1=#ff5555
+palette = 2=#50fa7b
+palette = 3=#f1fa8c
+palette = 4=#bd93f9
+palette = 5=#ff79c6
+palette = 6=#8be9fd
+palette = 7=#f8f8f2
+# bright
+palette = 8=#6272a4
+palette = 9=#ff6e6e
+palette = 10=#69ff94
+palette = 11=#ffffa5
+palette = 12=#d6acff
+palette = 13=#ff92df
+palette = 14=#a4ffff
+palette = 15=#ffffff
+
+# --- Font ---
+font-family = "Hack Nerd Font"
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Italic
+font-size = 12
+
+# --- Behavior ---
+copy-on-select = clipboard
+
+# --- Keybindings ---
+# Shift+Return -> "\r"
+keybind = shift+enter=text:\x1b\r
