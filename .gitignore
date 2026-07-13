@@ -1,2 +1,3 @@
 *.zwc
 /config/jj/repos/
+.DS_Store
