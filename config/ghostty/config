@@ -39,6 +39,7 @@ font-size = 12
 
 # --- Behavior ---
 copy-on-select = clipboard
+quit-after-last-window-closed=true
 
 # --- Keybindings ---
 # Shift+Return -> "\r"
