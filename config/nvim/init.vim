@@ -14,6 +14,8 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'folke/snacks.nvim'
+Plug 'shaunchander/hunk-review.nvim'
 
 " Initialize plugin system
 call plug#end()

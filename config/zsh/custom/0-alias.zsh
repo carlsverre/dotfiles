@@ -6,6 +6,9 @@ alias gid='git diff -C --date=local'
 alias giw='git show --ext-diff -C --date=local --decorate'
 alias gic='git checkout'
 
+# editor
+alias vim='nvim'
+
 # rg
 alias s='rg -S'
 
