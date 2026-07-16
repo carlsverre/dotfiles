@@ -20,7 +20,7 @@ Mod=Super    # Use super as the main modifier
 hc keybind $Mod-q close
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-space spawn rofi -show run
-hc keybind $Mod-Return spawn alacritty
+hc keybind $Mod-Return spawn ghostty
 
 hc keybind Ctrl-Shift-space spawn dunstctl close-all
 

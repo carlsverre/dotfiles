@@ -44,3 +44,6 @@ quit-after-last-window-closed=true
 # --- Keybindings ---
 # Shift+Return -> "\r"
 keybind = shift+enter=text:\x1b\r
+
+# hide titlebar on linux
+gtk-titlebar = false
