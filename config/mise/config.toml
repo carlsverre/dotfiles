@@ -19,10 +19,6 @@
 [settings]
 lockfile = true
 
-# Activate a uv project's .venv on cd into it. "create|source" would also make
-# the venv when there is not one yet.
-python.uv_venv_auto = "source"
-
 [tools]
 direnv = "latest"
 fd = "latest"
