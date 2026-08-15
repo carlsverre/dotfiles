@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+#
+# webi-purge -- remove what the old webinstall setup left behind.
+#
+# mise replaced webi (see config/mise/config.toml), but webi never deleted
+# anything it unpacked, so ~/.local/opt still holds every version it ever
+# installed. This clears the lot:
+#
+#   ~/.local/opt          every unpacked version, plus webi's go/node links
+#   ~/.local/bin/<shim>   the symlinks into ~/.local/opt, about to dangle
+#   ~/.local/bin/webi     webi itself
+#   ~/.local/bin/direnv   curled into place by the old install.sh
+#   ~/.config/envman      webi's PATH manager, no longer sourced by zshrc
+#
+# Everything else in ~/.local/bin is left alone. Run ./install.sh first so mise
+# has replacements in place, then run this once and delete it.
+#
+#   webi-purge          list what would go, then ask
+#   webi-purge --yes    skip the prompt
+set -eEuo pipefail
+
+OPT="${HOME}/.local/opt"
+BIN="${HOME}/.local/bin"
+
+assume_yes=false
+case "${1-}" in
+    "")        ;;
+    -y|--yes)  assume_yes=true ;;
+    -h|--help) sed -n '3,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *)         echo "usage: $0 [--yes]" >&2; exit 1 ;;
+esac
+
+# --- work out what goes ------------------------------------------------------
+
+doomed=()
+
+# webi's shims: symlinks in ~/.local/bin that point into ~/.local/opt. One
+# level of readlink is enough, webi never chained them.
+if [[ -d "$BIN" ]]; then
+    for link in "$BIN"/*; do
+        if [[ -L "$link" ]]; then
+            case "$(readlink "$link")" in
+                "$OPT"/*) doomed+=("$link") ;;
+            esac
+        fi
+    done
+fi
+
+# The real files, which the loop above skips by design.
+for path in "$OPT" "${BIN}/webi" "${BIN}/direnv" "${HOME}/.config/envman"; do
+    if [[ -e "$path" ]]; then
+        doomed+=("$path")
+    fi
+done
+
+if (( ${#doomed[@]} == 0 )); then
+    echo "webi-purge: nothing left to remove"
+    exit 0
+fi
+
+# --- report ------------------------------------------------------------------
+
+echo "to delete:"
+for path in "${doomed[@]}"; do
+    printf '    %-34s %s\n' "${path/#${HOME}/~}" "$(du -sh "$path" 2>/dev/null | cut -f1)"
+done
+echo
+echo "    total: $(du -shc "${doomed[@]}" 2>/dev/null | tail -1 | cut -f1)"
+
+if ! $assume_yes; then
+    echo
+    if [[ ! -t 0 ]]; then
+        echo "webi-purge: not a terminal; re-run with --yes" >&2
+        exit 1
+    fi
+    read -r -p "Delete these? [y/N] " reply
+    if [[ "$reply" != [yY] ]]; then
+        echo "aborted"
+        exit 1
+    fi
+fi
+
+# --- delete ------------------------------------------------------------------
+
+for path in "${doomed[@]}"; do
+    # Re-check the shape of every path right before the rm, in case something
+    # moved while the prompt sat open. Bail on the first thing that smells.
+    if [[ "$path" != "${HOME}"/* || "$path" == *..* ]]; then
+        echo "refusing: ${path} is not somewhere under \$HOME" >&2
+        exit 1
+    fi
+
+    # go's module cache unpacks read-only, so rm cannot descend into it.
+    chmod -R u+w "$path" 2>/dev/null || true
+    rm -rf "$path"
+    echo "deleted ${path/#${HOME}/~}"
+done
+
+echo
+echo "open a new shell; mise now provides these tools"

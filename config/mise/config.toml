@@ -1,0 +1,40 @@
+# mise's global config, linked here from the repo by install.sh.
+#
+# The versions below are ranges, not pins. The exact version of each tool, plus
+# a sha256 for every platform, lives in mise.lock beside this file -- which is
+# why `./install.sh` is reproducible and only `./install.sh --update` moves
+# anything.
+#
+# Adding a tool: `mise use -g <tool>@latest` writes it back into this file
+# through the symlink, or just edit it here. `mise registry` lists the names.
+#
+# rust is really rustup: mise installs rustup if it is missing, rustup owns
+# ~/.rustup and ~/.cargo as usual, and mise only pins RUSTUP_TOOLCHAIN on top,
+# so `rustup component add` and friends keep working. "default" is rustup's own
+# default profile -- rustc, cargo, rustfmt, clippy, rust-docs, rust-std -- named
+# here so a fresh machine does not inherit whatever rustup feels like that day.
+# The components list is add-only: anything else you `rustup component add` or
+# `rustup target add` by hand stays put, it just is not reproduced elsewhere.
+
+[settings]
+lockfile = true
+
+# Activate a uv project's .venv on cd into it. "create|source" would also make
+# the venv when there is not one yet.
+python.uv_venv_auto = "source"
+
+[tools]
+direnv = "latest"
+fd = "latest"
+fzf = "latest"
+gh = "latest"
+go = "latest"
+jq = "latest"
+neovim = "latest"
+node = "lts"
+ripgrep = "latest"
+uv = "latest"
+zoxide = "latest"
+rust = { version = "stable", profile = "default", components = ["rust-analyzer", "rust-src", "llvm-tools"] }
+"cargo:cargo-nextest" = "latest"
+"github:nalgeon/sqlpkg-cli" = "latest"
