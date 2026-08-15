@@ -38,7 +38,12 @@ zinit snippet OMZL::vcs_info.zsh
 
 # load custom config and theme
 zinit light ${ZSH_HOME}/theme
-zinit light ${ZSH_HOME}/custom
+
+# sourced directly, not via `zinit light`: zinit restores PATH when a plugin
+# finishes loading, so anything custom/ puts on PATH -- 2-path.zsh, and mise in
+# 3-mise.zsh -- is thrown away the moment it returns. That went unnoticed for
+# years because webi's envman re-added the same directories further down.
+source ${ZSH_HOME}/custom/init.zsh
 
 # load plugins
 zinit snippet OMZP::git
