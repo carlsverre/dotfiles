@@ -16,6 +16,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'folke/snacks.nvim'
 Plug 'shaunchander/hunk-review.nvim'
+Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
 call plug#end()
