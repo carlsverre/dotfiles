@@ -53,10 +53,10 @@ Layout:
 - `lib/*.sh` — function definitions only, sourced by `install.sh`
 - `config/mise/config.toml` — every CLI tool, linked to `~/.config/mise`
 
-[mise](https://mise.jdx.dev) owns the tools. Versions are ranges there and exact
-in `config/mise/mise.lock` beside it, so only `--update` moves anything. Add a
-tool with `mise use -g <name>@latest`, which writes back into the repo through
-the symlink; `mise registry` lists what is available.
+[mise](https://mise.jdx.dev) owns the tools. Versions there are ranges, and an
+installed tool stays put until `--update` moves it. Add a tool with `mise use -g
+<name>@latest`, which writes back into the repo through the symlink; `mise
+registry` lists what is available.
 
 Python is the exception: mise installs `uv`, and uv owns the interpreters
 (`uv python install --default` in `install.sh`).

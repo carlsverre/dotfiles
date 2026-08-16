@@ -70,21 +70,15 @@ export PATH="${HOME}/.local/share/mise/shims:${HOME}/.local/bin:${PATH}"
 if ${update}; then
     mise self-update --yes
 
-    # Re-resolve the "latest" and "lts" selectors in the config and write the
-    # new versions to the lock. Without --bump the lock keeps the versions it
-    # has and only its checksums get refreshed.
-    mise lock --bump --global --yes
+    # Re-resolve the "latest" and "lts" selectors in the config and move the
+    # already-installed tools up to whatever they point at now.
+    mise upgrade --yes
 fi
 
 # Reads ~/.config/mise/config.toml -- the copy linked from this repo above --
-# and installs exactly what mise.lock beside it pins, which is what keeps this
-# from drifting upward between runs.
+# and installs whatever it asks for that is missing. Tools already installed are
+# left where they are, so a plain run does not move anything.
 mise install --yes
-
-# mise writes the lock for a project config on its own but wants to be asked for
-# the global one, so this is what creates it on a fresh machine and what records
-# a tool newly added to the config.
-mise lock --global --yes
 
 if ${update}; then
     mise prune --yes --tools

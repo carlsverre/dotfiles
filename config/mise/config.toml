@@ -1,9 +1,8 @@
 # mise's global config, linked here from the repo by install.sh.
 #
-# The versions below are ranges, not pins. The exact version of each tool, plus
-# a sha256 for every platform, lives in mise.lock beside this file -- which is
-# why `./install.sh` is reproducible and only `./install.sh --update` moves
-# anything.
+# The versions below are ranges, not pins: `./install.sh` installs whatever they
+# resolve to at the time and leaves an already-installed tool alone, so nothing
+# moves until `./install.sh --update` re-resolves them.
 #
 # Adding a tool: `mise use -g <tool>@latest` writes it back into this file
 # through the symlink, or just edit it here. `mise registry` lists the names.
@@ -15,9 +14,6 @@
 # here so a fresh machine does not inherit whatever rustup feels like that day.
 # The components list is add-only: anything else you `rustup component add` or
 # `rustup target add` by hand stays put, it just is not reproduced elsewhere.
-
-[settings]
-lockfile = true
 
 [tools]
 direnv = "latest"
