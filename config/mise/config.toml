@@ -1,19 +1,7 @@
 # mise's global config, linked here from the repo by install.sh.
 #
-# The versions below are ranges, not pins: `./install.sh` installs whatever they
-# resolve to at the time and leaves an already-installed tool alone, so nothing
-# moves until `./install.sh --update` re-resolves them.
-#
 # Adding a tool: `mise use -g <tool>@latest` writes it back into this file
 # through the symlink, or just edit it here. `mise registry` lists the names.
-#
-# rust is really rustup: mise installs rustup if it is missing, rustup owns
-# ~/.rustup and ~/.cargo as usual, and mise only pins RUSTUP_TOOLCHAIN on top,
-# so `rustup component add` and friends keep working. "default" is rustup's own
-# default profile -- rustc, cargo, rustfmt, clippy, rust-docs, rust-std -- named
-# here so a fresh machine does not inherit whatever rustup feels like that day.
-# The components list is add-only: anything else you `rustup component add` or
-# `rustup target add` by hand stays put, it just is not reproduced elsewhere.
 
 [tools]
 direnv = "latest"
@@ -30,3 +18,7 @@ zoxide = "latest"
 rust = { version = "stable", profile = "default", components = ["rust-analyzer", "rust-src", "llvm-tools"] }
 "cargo:cargo-nextest" = "latest"
 "github:nalgeon/sqlpkg-cli" = "latest"
+"npm:typescript-language-server" = "latest"
+"npm:typescript" = "latest"
+"npm:pyright" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
