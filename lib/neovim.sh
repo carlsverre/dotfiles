@@ -38,3 +38,43 @@ nvim_headless() {
         echo "[!!] nvim: $* exited $?" >&2
     fi
 }
+
+# install_vim_wrapper -- put a `vim` on PATH that runs neovim.
+#
+# This cannot be a mise shim. Mise picks the tool from the name it was invoked
+# as, and no mise tool ships a `vim` binary, so a shim named vim finds nothing
+# and falls through to /usr/bin/vim -- which on Arch is built -xterm_clipboard
+# and drops every yank on the floor. Exec the shim by its own name instead, so
+# `vim` is the mise-managed neovim even where mise was never activated.
+install_vim_wrapper() {
+    local wrapper="${HOME}/.local/bin/vim"
+    local body='#!/bin/sh
+exec "${HOME}/.local/share/mise/shims/nvim" "$@"'
+    local reply
+
+    mkdir -p "$(dirname "$wrapper")"
+
+    if [[ -e "$wrapper" || -L "$wrapper" ]]; then
+        if [[ -f "$wrapper" && ! -L "$wrapper" && "$(cat "$wrapper")" == "$body" ]]; then
+            echo "[ok] ${wrapper} -> nvim"
+            return 0
+        fi
+
+        # Same deal as safelink's `ln -i`: ask before overwriting whatever is
+        # sitting there. A non-interactive run gets an empty read and declines.
+        echo "[!!] ${wrapper} already exists:"
+        ls -ld "$wrapper"
+        read -r -p "replace it with the neovim wrapper? [y/N] " reply || reply=""
+
+        if [[ ! "$reply" =~ ^[yY] ]]; then
+            echo "[--] ${wrapper} left alone"
+            return 0
+        fi
+
+        rm -f "$wrapper"
+    fi
+
+    printf '%s\n' "$body" > "$wrapper"
+    chmod +x "$wrapper"
+    echo "[++] ${wrapper} -> nvim"
+}

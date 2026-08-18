@@ -90,10 +90,9 @@ mise reshim
 
 echo "==> neovim"
 
-# Link the shim rather than the binary: a link into ~/.local/share/mise/installs
-# would break the next time neovim is upgraded. $EDITOR is vim and programs
-# like fzf exec it directly, so the zsh alias is not enough on its own.
-safelink "${HOME}/.local/bin/vim" "${HOME}/.local/share/mise/shims/nvim"
+# $EDITOR is nvim, but plenty of habits and scripts still say vim, and a zsh
+# alias only covers the interactive ones.
+install_vim_wrapper
 
 mkdir -p "${HOME}/.local/share/nvim/swp" "${HOME}/.local/share/nvim/undo"
 

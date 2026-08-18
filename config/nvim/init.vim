@@ -144,6 +144,15 @@ set directory=$HOME/.local/share/nvim/swp//,/tmp//,.
 " Share clipboard
 set clipboard+=unnamedplus
 
+" Over SSH there is no X display, so nvim finds no clipboard tool and yanks stay
+" inside nvim. Talk to the terminal with OSC 52 instead, which carries the yank
+" out and the paste back over the same connection. The terminal asks before it
+" hands the clipboard over, so the first paste of a session waits on that
+" prompt.
+if empty($DISPLAY) && empty($WAYLAND_DISPLAY)
+    let g:clipboard = 'osc52'
+endif
+
 " Better tab-completion
 set wildmenu
 
