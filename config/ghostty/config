@@ -44,6 +44,8 @@ quit-after-last-window-closed=true
 # --- Keybindings ---
 # Shift+Return -> "\r"
 keybind = shift+enter=text:\x1b\r
+# Ctrl+Backspace -> ctrl+w for delete word
+keybind = ctrl+backspace=text:\x17
 
 # hide titlebar on linux
 gtk-titlebar = false
