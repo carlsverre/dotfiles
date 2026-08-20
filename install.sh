@@ -49,16 +49,6 @@ git_include ".gitconfig.local"
 
 echo "==> tools"
 
-# mise resolves nearly every tool through the GitHub API, where an anonymous
-# caller gets 60 requests an hour and a token gets 5000. A token already in the
-# environment wins; otherwise borrow gh's for the length of this run. On a
-# machine with neither, this falls through to anonymous and the first install
-# still fits in 60.
-if [[ -z "${GITHUB_API_TOKEN:-}" && -z "${GITHUB_TOKEN:-}" ]] &&
-    command -v gh >/dev/null && gh auth status >/dev/null 2>&1; then
-    export GITHUB_API_TOKEN="$(gh auth token)"
-fi
-
 install_mise
 
 # Nothing here is on PATH yet on a fresh machine: ~/.local/bin holds the mise

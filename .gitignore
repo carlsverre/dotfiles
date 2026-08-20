@@ -1,3 +1,4 @@
 *.zwc
 /config/jj/repos/
+/config/mise/conf.d/local.toml
 .DS_Store
